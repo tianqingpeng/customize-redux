@@ -130,6 +130,8 @@ import { bindActionCreators } from '../redux';
             useLayoutEffect(() => {
                 return subscribe(forceUpdate);
             }, [subscribe]);
+            
+            //18版本时候可以用新提供的api去订阅处理 useSyncExternalStore
             return <OldComponent {...props} {...stateProps} {...dispatchProps} />
         }
     }
