@@ -126,12 +126,14 @@ import { bindActionCreators } from '../redux';
                 }
                 return dispatchProps;
             }, [dispatch]);
+            
+            //18版本时候可以用新提供的api去订阅处理 useSyncExternalStore
             const [, forceUpdate] = useReducer(x => x + 1, 0);
             useLayoutEffect(() => {
                 return subscribe(forceUpdate);
             }, [subscribe]);
             
-            //18版本时候可以用新提供的api去订阅处理 useSyncExternalStore
+ 
             return <OldComponent {...props} {...stateProps} {...dispatchProps} />
         }
     }
@@ -328,6 +330,8 @@ import { bindActionCreators } from '../redux';
                 }
                 return dispatchProps;
             }, [dispatch]);
+            
+            //18版本时候可以用新提供的api去订阅处理 useSyncExternalStore
             const [, forceUpdate] = useReducer(x => x + 1, 0);
             useLayoutEffect(() => {
                 return subscribe(forceUpdate);
@@ -373,6 +377,8 @@ function useSelector(selector,equalityFn=shallowEqual){
     //获取仓库中的最新的状态
     let state = store.getState();
     let selectedState = selector(state);
+    
+    //18版本时候可以用新提供的api去订阅处理 useSyncExternalStore
     //每次计算完selectedState之后会判断状态变化了没有，如果变化 了，组件会刷新，如果没变化组件不刷新
     let [,forceUpdate] = useReducer(x=>x+1,0);
     useLayoutEffect(()=>store.subscribe(()=>{
